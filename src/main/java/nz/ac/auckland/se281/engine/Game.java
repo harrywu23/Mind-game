@@ -20,16 +20,18 @@ public class Game {
   }  
 
   public void play() {
+
     if (currentRound <= numRounds){
       MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
       currentRound++; 
     }
+
     MessageCli.ASK_HUMAN_INPUT.printMessage();
+
     Colour userInput = Colour.fromInput(input);
-    for (Colour c : Colour.values()) {
-      if (c != userInput){
+    
+     if (userInput == null) {
         MessageCli.INVALID_HUMAN_INPUT.printMessage();
-      }
     }
   }
 
