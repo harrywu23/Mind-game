@@ -27,14 +27,17 @@ public class Game {
       currentRound++; 
     }
 
+    boolean validInput = false;
+
+    while (!validInput){
     MessageCli.ASK_HUMAN_INPUT.printMessage();
 
-    String input = Utils.scanner.nextLine().toUpperCase();
-String[] inputs = input.split(" ");
+    String input = Utils.scanner.nextLine().toUpperCase().trim();
+    String[] inputs = input.split(" ");
 
 if (inputs.length != 2) {
   MessageCli.INVALID_HUMAN_INPUT.printMessage();
-  return;
+  continue;
 }
 
 Colour chosen = Colour.fromInput(inputs[0]);
@@ -42,11 +45,13 @@ Colour guess = Colour.fromInput(inputs[1]);
 
 if (chosen == null || guess == null) {
   MessageCli.INVALID_HUMAN_INPUT.printMessage();
-  return;
+  continue;
 }
+
+validInput = true;
 
 MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
   }
-
+}
   public void showStats() {}
 }
