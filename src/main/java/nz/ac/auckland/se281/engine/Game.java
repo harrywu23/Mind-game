@@ -37,7 +37,10 @@ public class Game {
     }
 
     String input = Utils.scanner.nextLine();
-    MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer,input);
+  String[] splitColour = input.split(" ", 2);
+  String chosen = splitColour[0]; 
+  String guess = splitColour[1];  
+    MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen, guess);
     
   }
 
