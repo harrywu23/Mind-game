@@ -3,6 +3,7 @@ package nz.ac.auckland.se281.engine;
 import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
 import nz.ac.auckland.se281.model.Colour;
+import nz.ac.auckland.se281.cli.Utils;
 
 public class Game {
 
@@ -10,11 +11,12 @@ public class Game {
   private int numRounds;
   private int currentRound = 1;
   private String input;
+  private String namePlayer;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
     if (options.length > 0) {
-      String namePlayer = options[0];
+      this.namePlayer = options[0];
       MessageCli.WELCOME_PLAYER.printMessage(namePlayer);
     }
   }  
@@ -33,6 +35,10 @@ public class Game {
      if (userInput == null) {
         MessageCli.INVALID_HUMAN_INPUT.printMessage();
     }
+
+    String input = Utils.scanner.nextLine();
+    MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer,input);
+    
   }
 
   public void showStats() {}
