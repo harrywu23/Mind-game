@@ -10,7 +10,6 @@ public class Game {
   public static String AI_NAME = "HAL-9000";
   private int numRounds;
   private int currentRound = 1;
-  private String input;
   private String namePlayer;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
@@ -30,18 +29,23 @@ public class Game {
 
     MessageCli.ASK_HUMAN_INPUT.printMessage();
 
-    Colour userInput = Colour.fromInput(input);
-    
-     if (userInput == null) {
-        MessageCli.INVALID_HUMAN_INPUT.printMessage();
-    }
+    String input = Utils.scanner.nextLine().toUpperCase();
+String[] inputs = input.split(" ");
 
-    String input = Utils.scanner.nextLine();
-  String[] splitColour = input.split(" ", 2);
-  String chosen = splitColour[0]; 
-  String guess = splitColour[1];  
-    MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen, guess);
-    
+if (inputs.length != 2) {
+  MessageCli.INVALID_HUMAN_INPUT.printMessage();
+  return;
+}
+
+Colour chosen = Colour.fromInput(inputs[0]);
+Colour guess = Colour.fromInput(inputs[1]);
+
+if (chosen == null || guess == null) {
+  MessageCli.INVALID_HUMAN_INPUT.printMessage();
+  return;
+}
+
+MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
   }
 
   public void showStats() {}
