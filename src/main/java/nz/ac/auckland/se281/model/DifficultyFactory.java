@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281.model;
 
-public class DifficultyPicker {
+public class DifficultyFactory {
 
   public static AIStrategy chooseDifficulty(String difficulty) {
     difficulty = difficulty.toUpperCase().trim();

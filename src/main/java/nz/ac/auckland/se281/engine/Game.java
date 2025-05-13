@@ -4,7 +4,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
 import nz.ac.auckland.se281.model.AIStrategy;
 import nz.ac.auckland.se281.model.Colour;
-import nz.ac.auckland.se281.model.DifficultyPicker;
+import nz.ac.auckland.se281.model.DifficultyFactory;
 import nz.ac.auckland.se281.cli.Utils;
 
 public class Game {
@@ -22,6 +22,8 @@ public class Game {
     this.numRounds = numRounds;
     this.gameDifficulty = difficulty;
     this.currentRound = 1;
+
+    // task 1 case 1
     if (options.length > 0) {
       this.namePlayer = options[0];
       MessageCli.WELCOME_PLAYER.printMessage(namePlayer);
@@ -29,6 +31,7 @@ public class Game {
   }
 
   public void play() {
+
     if (currentRound > numRounds) {
       return;
     }
@@ -62,13 +65,13 @@ public class Game {
         }
 
         // Task 2 case 1
-        AIStrategy strategy = DifficultyPicker.chooseDifficulty(gameDifficulty.toString());
+        AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString());
         Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
         Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
-        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose.toString(), aiGuess.toString());
+        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
         validInput = true;
-        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
+        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen, guess);
         this.powerColour = Colour.getRandomColourForPowerColour();
         MessageCli.PRINT_POWER_COLOUR.printMessage(powerColour);
 
@@ -82,7 +85,7 @@ public class Game {
         if (guess.equals(aiChoose)) {
           playerRoundPoints += 1;
           if (guess.equals(powerColour)) {
-            playerRoundPoints += 2; // Bonus for guessing power colour
+            playerRoundPoints += 2; // Bonus for guessing power colour (task 8 - 10)
           }
         }
 
@@ -90,13 +93,15 @@ public class Game {
         if (aiGuess.equals(chosen)) {
           aiRoundPoints += 1;
           if (aiGuess.equals(powerColour)) {
-            aiRoundPoints += 2; // Bonus for guessing power colour
+            aiRoundPoints += 2; // Bonus for guessing power colour (task 8 - 10)
           }
         }
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
+
+      // not power round
     } else if (!(currentRound % 3 == 0)) {
       boolean validInput = false;
       currentRound++;
@@ -121,13 +126,13 @@ public class Game {
         }
 
         // Task 2 case 1
-        AIStrategy strategy = DifficultyPicker.chooseDifficulty(gameDifficulty.toString());
+        AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString());
         Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
         Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
-        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose.toString(), aiGuess.toString());
+        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
         validInput = true;
-        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
+        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen, guess);
 
         // point scoring logic task 2 test 4 - test 7
 
