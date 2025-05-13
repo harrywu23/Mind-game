@@ -101,10 +101,13 @@ public class Game {
         validInput = true;
         MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
 
-        if (aiGuess.toString().equals(chosen.toString())) {
+        if (aiGuess.toString().equals(chosen.toString()) && guess.toString().equals(aiChoose.toString())) {
           aiScore++;
+          playerScore++;
         } else if (guess.toString().equals(aiChoose.toString())) {
           playerScore++;
+        } else if (aiGuess.toString().equals(chosen.toString())) {
+          aiScore++;
         }
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerScore));
