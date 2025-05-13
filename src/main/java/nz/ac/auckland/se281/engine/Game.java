@@ -14,6 +14,8 @@ public class Game {
   private int currentRound = 1;
   private String namePlayer;
   private Difficulty gameDifficulty;
+  private int aiScore;
+  private int playerScore;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -98,6 +100,15 @@ public class Game {
 
         validInput = true;
         MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
+
+        if (aiGuess.toString().equals(chosen.toString())) {
+          aiScore++;
+        } else if (guess.toString().equals(aiChoose.toString())) {
+          playerScore++;
+        }
+
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerScore));
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiScore));
       }
     }
   }
