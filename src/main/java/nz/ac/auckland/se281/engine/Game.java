@@ -2,9 +2,10 @@ package nz.ac.auckland.se281.engine;
 
 import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
+import nz.ac.auckland.se281.model.AIStrategy;
 import nz.ac.auckland.se281.model.Colour;
+import nz.ac.auckland.se281.model.DifficultyPicker;
 import nz.ac.auckland.se281.cli.Utils;
-import nz.ac.auckland.se281.model.RandomStrategy;
 
 public class Game {
 
@@ -12,9 +13,11 @@ public class Game {
   private int numRounds;
   private int currentRound = 1;
   private String namePlayer;
+  private Difficulty gameDifficulty;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
+    this.gameDifficulty = difficulty;
     if (options.length > 0) {
       this.namePlayer = options[0];
       MessageCli.WELCOME_PLAYER.printMessage(namePlayer);
@@ -49,6 +52,12 @@ public class Game {
           continue;
         }
 
+        // Task 2 case 1
+        AIStrategy strategy = DifficultyPicker.chooseDifficulty(gameDifficulty.toString());
+        Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
+        Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
+        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose.toString(), aiGuess.toString());
+
         validInput = true;
         MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
         MessageCli.PRINT_POWER_COLOUR.printMessage(Colour.getRandomColourForPowerColour());
@@ -77,11 +86,10 @@ public class Game {
         }
 
         // Task 2 case 1
-        RandomStrategy randomColourChoose = new RandomStrategy();
-        String aiChoose = randomColourChoose.setStrategy().toString();
-        RandomStrategy randomColourGuess = new RandomStrategy();
-        String aiGuess = randomColourGuess.setStrategy().toString();
-        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
+        AIStrategy strategy = DifficultyPicker.chooseDifficulty(gameDifficulty.toString());
+        Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
+        Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
+        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose.toString(), aiGuess.toString());
 
         validInput = true;
         MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
@@ -90,5 +98,9 @@ public class Game {
   }
 
   public void showStats() {
+  }
+
+  public Difficulty getGameDifficulty() {
+    return this.gameDifficulty;
   }
 }
