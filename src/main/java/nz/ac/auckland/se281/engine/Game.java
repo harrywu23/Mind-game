@@ -14,8 +14,8 @@ public class Game {
   private int currentRound = 1;
   private String namePlayer;
   private Difficulty gameDifficulty;
-  private int aiScore;
-  private int playerScore;
+  private int aiRoundPoints;
+  private int playerRoundPoints;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -101,17 +101,20 @@ public class Game {
         validInput = true;
         MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
 
+        // point scoring logic task 2 test 4 - test 7
         if (aiGuess.toString().equals(chosen.toString()) && guess.toString().equals(aiChoose.toString())) {
-          aiScore++;
-          playerScore++;
+          playerRoundPoints = 1;
+          aiRoundPoints = 1;
         } else if (guess.toString().equals(aiChoose.toString())) {
-          playerScore++;
+          aiRoundPoints = 0;
+          playerRoundPoints = 1;
         } else if (aiGuess.toString().equals(chosen.toString())) {
-          aiScore++;
+          aiRoundPoints = 1;
+          playerRoundPoints = 0;
         }
 
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerScore));
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiScore));
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerRoundPoints));
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
     }
   }
