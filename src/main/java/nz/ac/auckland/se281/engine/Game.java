@@ -102,15 +102,18 @@ public class Game {
         MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
 
         // point scoring logic task 2 test 4 - test 7
+
+        // resetting points to 0 each round
+        playerRoundPoints = 0;
+        aiRoundPoints = 0;
+
         if (aiGuess.toString().equals(chosen.toString()) && guess.toString().equals(aiChoose.toString())) {
-          playerRoundPoints = 1;
-          aiRoundPoints = 1;
+          playerRoundPoints += 1;
+          aiRoundPoints += 1;
         } else if (guess.toString().equals(aiChoose.toString())) {
-          aiRoundPoints = 0;
-          playerRoundPoints = 1;
+          playerRoundPoints += 1;
         } else if (aiGuess.toString().equals(chosen.toString())) {
-          aiRoundPoints = 1;
-          playerRoundPoints = 0;
+          aiRoundPoints += 1;
         }
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerRoundPoints));
