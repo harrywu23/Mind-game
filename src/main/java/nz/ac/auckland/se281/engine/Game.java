@@ -18,6 +18,7 @@ public class Game {
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
     this.gameDifficulty = difficulty;
+    this.currentRound = 1;
     if (options.length > 0) {
       this.namePlayer = options[0];
       MessageCli.WELCOME_PLAYER.printMessage(namePlayer);
@@ -25,11 +26,15 @@ public class Game {
   }
 
   public void play() {
-    if (currentRound <= numRounds) {
-      MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
+    if (currentRound > numRounds) {
+      return;
     }
 
-    if (currentRound % 3 == 0 && currentRound != 0) {
+    MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
+
+    if (currentRound % 3 == 0 && currentRound != 0)
+
+    {
       boolean validInput = false;
       currentRound++;
 
