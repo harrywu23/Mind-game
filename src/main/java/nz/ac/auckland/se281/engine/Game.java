@@ -78,15 +78,20 @@ public class Game {
         playerRoundPoints = 0;
         aiRoundPoints = 0;
 
-        if (aiGuess.toString().equals(chosen.toString()) && guess.toString().equals(aiChoose.toString())
-            && aiGuess.equals(powerColour)
-            && guess.equals(powerColour)) {
-          playerRoundPoints += 3;
-          aiRoundPoints += 3;
-        } else if (guess.toString().equals(aiChoose.toString()) && guess.equals(powerColour)) {
-          playerRoundPoints += 3;
-        } else if (aiGuess.toString().equals(chosen.toString()) && chosen.equals(powerColour)) {
-          aiRoundPoints += 3;
+        // Player guessing AI's colour
+        if (guess.equals(aiChoose)) {
+          playerRoundPoints += 1;
+          if (guess.equals(powerColour)) {
+            playerRoundPoints += 2; // Bonus for guessing power colour
+          }
+        }
+
+        // AI guessing Player's colour
+        if (aiGuess.equals(chosen)) {
+          aiRoundPoints += 1;
+          if (aiGuess.equals(powerColour)) {
+            aiRoundPoints += 2; // Bonus for guessing power colour
+          }
         }
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerRoundPoints));
@@ -130,12 +135,12 @@ public class Game {
         playerRoundPoints = 0;
         aiRoundPoints = 0;
 
-        if (aiGuess.toString().equals(chosen.toString()) && guess.toString().equals(aiChoose.toString())) {
+        if (aiGuess.equals(chosen) && guess.equals(aiChoose)) {
           playerRoundPoints += 1;
           aiRoundPoints += 1;
-        } else if (guess.toString().equals(aiChoose.toString())) {
+        } else if (guess.equals(aiChoose)) {
           playerRoundPoints += 1;
-        } else if (aiGuess.toString().equals(chosen.toString())) {
+        } else if (aiGuess.equals(chosen)) {
           aiRoundPoints += 1;
         }
 
