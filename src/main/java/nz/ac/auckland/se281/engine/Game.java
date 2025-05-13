@@ -4,6 +4,7 @@ import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
 import nz.ac.auckland.se281.model.Colour;
 import nz.ac.auckland.se281.cli.Utils;
+import nz.ac.auckland.se281.model.RandomStrategy;
 
 public class Game {
 
@@ -18,69 +19,76 @@ public class Game {
       this.namePlayer = options[0];
       MessageCli.WELCOME_PLAYER.printMessage(namePlayer);
     }
-  }  
+  }
 
   public void play() {
     if (currentRound <= numRounds) {
       MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
     }
-    
-    if (currentRound % 3 == 0 && currentRound != 0){
-    boolean validInput = false;
-    currentRound++; 
 
-    while (!validInput) {
-      MessageCli.ASK_HUMAN_INPUT.printMessage();
-  
-      String input = Utils.scanner.nextLine().toUpperCase().trim();
-      String[] inputs = input.split(" ");
-  
-      if (inputs.length != 2) {
-        MessageCli.INVALID_HUMAN_INPUT.printMessage();
-        continue;
+    if (currentRound % 3 == 0 && currentRound != 0) {
+      boolean validInput = false;
+      currentRound++;
+
+      while (!validInput) {
+        MessageCli.ASK_HUMAN_INPUT.printMessage();
+
+        String input = Utils.scanner.nextLine().toUpperCase().trim();
+        String[] inputs = input.split(" ");
+
+        if (inputs.length != 2) {
+          MessageCli.INVALID_HUMAN_INPUT.printMessage();
+          continue;
+        }
+
+        Colour chosen = Colour.fromInput(inputs[0]);
+        Colour guess = Colour.fromInput(inputs[1]);
+
+        if (chosen == null || guess == null) {
+          MessageCli.INVALID_HUMAN_INPUT.printMessage();
+          continue;
+        }
+
+        validInput = true;
+        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
+        MessageCli.PRINT_POWER_COLOUR.printMessage(Colour.getRandomColourForPowerColour());
       }
-  
-      Colour chosen = Colour.fromInput(inputs[0]);
-      Colour guess = Colour.fromInput(inputs[1]);
-  
-      if (chosen == null || guess == null) {
-        MessageCli.INVALID_HUMAN_INPUT.printMessage();
-        continue;
+    } else if (!(currentRound % 3 == 0)) {
+      boolean validInput = false;
+      currentRound++;
+
+      while (!validInput) {
+        MessageCli.ASK_HUMAN_INPUT.printMessage();
+
+        String input = Utils.scanner.nextLine().toUpperCase().trim();
+        String[] inputs = input.split(" ");
+
+        if (inputs.length != 2) {
+          MessageCli.INVALID_HUMAN_INPUT.printMessage();
+          continue;
+        }
+
+        Colour chosen = Colour.fromInput(inputs[0]);
+        Colour guess = Colour.fromInput(inputs[1]);
+
+        if (chosen == null || guess == null) {
+          MessageCli.INVALID_HUMAN_INPUT.printMessage();
+          continue;
+        }
+
+        // Task 2 case 1
+        RandomStrategy randomColourChoose = new RandomStrategy();
+        String aiChoose = randomColourChoose.setStrategy().toString();
+        RandomStrategy randomColourGuess = new RandomStrategy();
+        String aiGuess = randomColourGuess.setStrategy().toString();
+        MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
+
+        validInput = true;
+        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
       }
-  
-      validInput = true;
-      MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
-      MessageCli.PRINT_POWER_COLOUR.printMessage(Colour.getRandomColourForPowerColour());
     }
   }
-  else if (!(currentRound % 3 == 0)){
-    boolean validInput = false;
-    currentRound++; 
 
-    while (!validInput) {
-      MessageCli.ASK_HUMAN_INPUT.printMessage();
-  
-      String input = Utils.scanner.nextLine().toUpperCase().trim();
-      String[] inputs = input.split(" ");
-  
-      if (inputs.length != 2) {
-        MessageCli.INVALID_HUMAN_INPUT.printMessage();
-        continue;
-      }
-  
-      Colour chosen = Colour.fromInput(inputs[0]);
-      Colour guess = Colour.fromInput(inputs[1]);
-  
-      if (chosen == null || guess == null) {
-        MessageCli.INVALID_HUMAN_INPUT.printMessage();
-        continue;
-      }
-  
-      validInput = true;
-      MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
-    }
+  public void showStats() {
   }
-}
-  
-  public void showStats() {}
 }
