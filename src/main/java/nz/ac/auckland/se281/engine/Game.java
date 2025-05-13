@@ -16,6 +16,7 @@ public class Game {
   private Difficulty gameDifficulty;
   private int aiRoundPoints;
   private int playerRoundPoints;
+  private Colour powerColour;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -34,6 +35,7 @@ public class Game {
 
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
 
+    // if power round
     if (currentRound % 3 == 0 && currentRound != 0)
 
     {
@@ -67,7 +69,28 @@ public class Game {
 
         validInput = true;
         MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen.toString(), guess.toString());
-        MessageCli.PRINT_POWER_COLOUR.printMessage(Colour.getRandomColourForPowerColour());
+        this.powerColour = Colour.getRandomColourForPowerColour();
+        MessageCli.PRINT_POWER_COLOUR.printMessage(powerColour);
+
+        // point scoring logic task 2 test 4 - test 7
+
+        // resetting points to 0 each round
+        playerRoundPoints = 0;
+        aiRoundPoints = 0;
+
+        if (aiGuess.toString().equals(chosen.toString()) && guess.toString().equals(aiChoose.toString())
+            && aiGuess.equals(powerColour)
+            && guess.equals(powerColour)) {
+          playerRoundPoints += 3;
+          aiRoundPoints += 3;
+        } else if (guess.toString().equals(aiChoose.toString()) && guess.equals(powerColour)) {
+          playerRoundPoints += 3;
+        } else if (aiGuess.toString().equals(chosen.toString()) && chosen.equals(powerColour)) {
+          aiRoundPoints += 3;
+        }
+
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerRoundPoints));
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
     } else if (!(currentRound % 3 == 0)) {
       boolean validInput = false;
