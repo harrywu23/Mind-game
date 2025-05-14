@@ -45,7 +45,6 @@ public class Game {
 
     {
       boolean validInput = false;
-      currentRound++;
 
       while (!validInput) {
         MessageCli.ASK_HUMAN_INPUT.printMessage();
@@ -68,9 +67,9 @@ public class Game {
         }
 
         // Task 2 case 1
-        AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString());
+        AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString(), this);
         Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
-        Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
+        Colour aiGuess = strategy.guessColour(); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -108,7 +107,6 @@ public class Game {
       // not power round
     } else if (!(currentRound % 3 == 0)) {
       boolean validInput = false;
-      currentRound++;
 
       while (!validInput) {
         MessageCli.ASK_HUMAN_INPUT.printMessage();
@@ -131,9 +129,9 @@ public class Game {
         }
 
         // Task 2 case 1
-        AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString());
+        AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString(), this);
         Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
-        Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
+        Colour aiGuess = strategy.guessColour(); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -159,6 +157,7 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
     }
+    currentRound++;
   }
 
   public void showStats() {
@@ -168,7 +167,11 @@ public class Game {
     return this.gameDifficulty;
   }
 
-  public int getCurrentRound(){
+  public int getCurrentRound() {
     return this.currentRound;
+  }
+
+  public Player getHumanPlayer() {
+    return humanPlayer;
   }
 }

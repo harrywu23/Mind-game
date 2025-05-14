@@ -1,8 +1,31 @@
 package nz.ac.auckland.se281.model;
 
-// public class AvoidLastStrategy implements AIStrategy {
+import nz.ac.auckland.se281.engine.Game;
 
-// @Override
-// public Colour setStrategy() {
-// }
-// }
+public class AvoidLastStrategy implements AIStrategy {
+
+  private Game game;
+
+  public AvoidLastStrategy(Game game) {
+    this.game = game;
+  }
+
+  @Override
+  public Colour setStrategy() {
+    return Colour.getRandomColourForAi();
+  }
+
+  public Colour guessColour() {
+    int round = game.getCurrentRound();
+
+    // First round → completely random
+    if (round == 1) {
+      return Colour.getRandomColourForAi();
+    }
+
+    // Later rounds → avoid last human choice
+    Colour lastColour = game.getHumanPlayer().getLastChosenColour();
+
+    return Colour.getRandomColourExcluding(lastColour);
+  }
+}
