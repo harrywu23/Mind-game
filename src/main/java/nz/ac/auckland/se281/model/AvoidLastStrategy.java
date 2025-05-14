@@ -17,7 +17,7 @@ public class AvoidLastStrategy implements AIStrategy {
 
   public Colour guessColour() {
     int round = game.getCurrentRound();
-    Colour lastColour = game.getHumanPlayer().getLastChosenColour();
+    Colour lastColour = game.getPlayer().getLastChosenColour();
     // First round → completely random
     if (round > 1) {
       return Colour.getRandomColourExcluding(lastColour);
