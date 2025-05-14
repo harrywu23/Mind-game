@@ -4,8 +4,10 @@ import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
 import nz.ac.auckland.se281.model.AIStrategy;
 import nz.ac.auckland.se281.model.Colour;
+//import nz.ac.auckland.se281.model.DifficultyFactory;
 import nz.ac.auckland.se281.model.RandomStrategy;
 import nz.ac.auckland.se281.cli.Utils;
+//import nz.ac.auckland.se281.model.AIDifficulty;
 
 public class Game {
 

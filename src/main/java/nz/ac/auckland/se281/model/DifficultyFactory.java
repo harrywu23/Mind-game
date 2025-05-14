@@ -2,7 +2,7 @@ package nz.ac.auckland.se281.model;
 
 public class DifficultyFactory {
 
-  public static Difficulty selectDifficulty(String type) {
+  public static AIDifficulty selectDifficulty(String type) {
     switch (type) {
       case "EASY":
         return new Easy();
