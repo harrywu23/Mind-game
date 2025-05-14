@@ -1,19 +1,21 @@
+package nz.ac.auckland.se281.model;
+
 public class StrategyPicker {
-    private AIStrategy strategy;
+  private AIStrategy strategy;
 
-    public StrategyPicker(AIStrategy strategy) {
-        this.strategy = strategy;
-    }
+  public StrategyPicker(AIStrategy strategy) {
+    this.strategy = strategy;
+  }
 
-    public void setStrategy(AIStrategy strategy) {
-        this.strategy = strategy;
-    }
+  public void setStrategy(AIStrategy strategy) {
+    this.strategy = strategy;
+  }
 
-    public AIStrategy getStrategy() {
-        return strategy;
-    }
+  public AIStrategy getStrategy() {
+    return strategy;
+  }
 
-    public Colour getGuess() {
-        return strategy.guessColour();
-    }
+  public Colour getGuess() {
+    return strategy.guessColour();
+  }
 }
