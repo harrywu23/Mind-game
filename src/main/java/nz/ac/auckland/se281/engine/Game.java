@@ -17,6 +17,7 @@ public class Game {
   private int playerRoundPoints;
   private Colour powerColour;
   private Player humanPlayer;
+  private Colour chosenPlayerColour;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -59,7 +60,7 @@ public class Game {
 
         Colour chosen = Colour.fromInput(inputs[0]);
         Colour guess = Colour.fromInput(inputs[1]);
-        humanPlayer.setLastChosenColour(chosen);
+        this.chosenPlayerColour = chosen;
 
         if (chosen == null || guess == null) {
           MessageCli.INVALID_HUMAN_INPUT.printMessage();
@@ -121,7 +122,7 @@ public class Game {
 
         Colour chosen = Colour.fromInput(inputs[0]);
         Colour guess = Colour.fromInput(inputs[1]);
-        humanPlayer.setLastChosenColour(chosen);
+        this.chosenPlayerColour = chosen;
 
         if (chosen == null || guess == null) {
           MessageCli.INVALID_HUMAN_INPUT.printMessage();
@@ -156,6 +157,7 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(humanPlayer.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
+      humanPlayer.setLastChosenColour(this.chosenPlayerColour);
     }
     currentRound++;
   }
@@ -173,5 +175,9 @@ public class Game {
 
   public Player getHumanPlayer() {
     return humanPlayer;
+  }
+
+  public Colour getChosenPlayerColour() {
+    return this.chosenPlayerColour;
   }
 }
