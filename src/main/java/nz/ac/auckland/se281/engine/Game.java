@@ -3,6 +3,7 @@ package nz.ac.auckland.se281.engine;
 import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
 import nz.ac.auckland.se281.model.AIStrategy;
+import nz.ac.auckland.se281.model.AvoidLastStrategy;
 import nz.ac.auckland.se281.model.Colour;
 //import nz.ac.auckland.se281.model.DifficultyFactory;
 import nz.ac.auckland.se281.model.RandomStrategy;
@@ -41,6 +42,7 @@ public class Game {
       return;
     }
 
+    // AIStrategy strategy = new AvoidLastStrategy(this);
     AIStrategy strategy = new RandomStrategy();
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
 
