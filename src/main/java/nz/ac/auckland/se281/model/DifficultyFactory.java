@@ -1,4 +1,5 @@
 package nz.ac.auckland.se281.model;
+
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class DifficultyFactory {
