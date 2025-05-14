@@ -39,7 +39,7 @@ public class Game {
       return;
     }
 
-    AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString(), this);
+    AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty);
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
 
     // if power round

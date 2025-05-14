@@ -6,6 +6,6 @@ public class Medium implements Difficulty {
 
   @Override
   public AIStrategy createStrategy(Game game) {
-    return new AvoidLastStrategy(game);
+    return new AvoidLastStrategy();
   }
 }

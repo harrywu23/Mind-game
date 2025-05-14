@@ -6,7 +6,10 @@ public class AvoidLastStrategy implements AIStrategy {
 
   private Game game;
 
-  public AvoidLastStrategy(Game game) {
+  public AvoidLastStrategy() {
+  }
+
+  public void setGame(Game game) {
     this.game = game;
   }
 

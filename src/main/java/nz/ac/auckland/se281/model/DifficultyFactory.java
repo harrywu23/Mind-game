@@ -1,17 +1,15 @@
 package nz.ac.auckland.se281.model;
-
-import nz.ac.auckland.se281.engine.Game;
+import nz.ac.auckland.se281.Main.Difficulty;
 
 public class DifficultyFactory {
 
-  public static AIStrategy chooseDifficulty(String difficulty, Game game) {
-    difficulty = difficulty.toUpperCase().trim();
+  public static AIStrategy chooseDifficulty(Difficulty difficulty) {
     switch (difficulty) {
-      case "EASY":
+      case EASY:
         return new RandomStrategy();
 
-      case "MEDIUM":
-        return new AvoidLastStrategy(game);
+      case MEDIUM:
+        return new AvoidLastStrategy();
 
       default:
         System.exit(0); // this is bad! it's there because we did not cover exceptions yet :)
