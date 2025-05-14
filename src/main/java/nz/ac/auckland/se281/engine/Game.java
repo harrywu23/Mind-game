@@ -12,11 +12,11 @@ public class Game {
   public static String AI_NAME = "HAL-9000";
   private int numRounds;
   private int currentRound = 1;
-  private String namePlayer;
   private Difficulty gameDifficulty;
   private int aiRoundPoints;
   private int playerRoundPoints;
   private Colour powerColour;
+  private Player humanPlayer;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -25,8 +25,10 @@ public class Game {
 
     // task 1 case 1
     if (options.length > 0) {
-      this.namePlayer = options[0];
-      MessageCli.WELCOME_PLAYER.printMessage(namePlayer);
+      String playerName = options[0];
+      humanPlayer = new Player(playerName);
+      MessageCli.WELCOME_PLAYER.printMessage(playerName);
+
     }
   }
 
@@ -58,6 +60,7 @@ public class Game {
 
         Colour chosen = Colour.fromInput(inputs[0]);
         Colour guess = Colour.fromInput(inputs[1]);
+        humanPlayer.setLastChosenColour(chosen);
 
         if (chosen == null || guess == null) {
           MessageCli.INVALID_HUMAN_INPUT.printMessage();
@@ -68,10 +71,11 @@ public class Game {
         AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString());
         Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
         Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
+
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
         validInput = true;
-        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen, guess);
+        MessageCli.PRINT_INFO_MOVE.printMessage(humanPlayer.getName(), chosen, guess);
         this.powerColour = Colour.getRandomColourForPowerColour();
         MessageCli.PRINT_POWER_COLOUR.printMessage(powerColour);
 
@@ -97,7 +101,7 @@ public class Game {
           }
         }
 
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerRoundPoints));
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(humanPlayer.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
 
@@ -119,6 +123,7 @@ public class Game {
 
         Colour chosen = Colour.fromInput(inputs[0]);
         Colour guess = Colour.fromInput(inputs[1]);
+        humanPlayer.setLastChosenColour(chosen);
 
         if (chosen == null || guess == null) {
           MessageCli.INVALID_HUMAN_INPUT.printMessage();
@@ -129,10 +134,11 @@ public class Game {
         AIStrategy strategy = DifficultyFactory.chooseDifficulty(gameDifficulty.toString());
         Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
         Colour aiGuess = strategy.setStrategy(); // The AI's guessed colour
+
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
         validInput = true;
-        MessageCli.PRINT_INFO_MOVE.printMessage(namePlayer, chosen, guess);
+        MessageCli.PRINT_INFO_MOVE.printMessage(humanPlayer.getName(), chosen, guess);
 
         // point scoring logic task 2 test 4 - test 7
 
@@ -149,7 +155,7 @@ public class Game {
           aiRoundPoints += 1;
         }
 
-        MessageCli.PRINT_OUTCOME_ROUND.printMessage(namePlayer, String.valueOf(playerRoundPoints));
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(humanPlayer.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
     }
@@ -160,5 +166,9 @@ public class Game {
 
   public Difficulty getGameDifficulty() {
     return this.gameDifficulty;
+  }
+
+  public int getCurrentRound(){
+    return this.currentRound;
   }
 }
