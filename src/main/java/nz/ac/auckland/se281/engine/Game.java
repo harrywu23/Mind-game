@@ -157,8 +157,8 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(humanPlayer.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
-      humanPlayer.setLastChosenColour(this.chosenPlayerColour);
     }
+    humanPlayer.setLastChosenColour(this.chosenPlayerColour);
     currentRound++;
   }
 
