@@ -11,7 +11,7 @@ public class AvoidLastStrategy implements AIStrategy {
   }
 
   @Override
-  public Colour setStrategy() {
+  public Colour chooseColour() {
     return Colour.getRandomColourForAi();
   }
 

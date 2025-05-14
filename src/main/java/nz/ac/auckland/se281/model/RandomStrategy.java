@@ -3,7 +3,7 @@ package nz.ac.auckland.se281.model;
 public class RandomStrategy implements AIStrategy {
 
   @Override
-  public Colour setStrategy() {
+  public Colour chooseColour() {
     return Colour.getRandomColourForAi();
   }
 

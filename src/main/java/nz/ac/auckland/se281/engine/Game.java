@@ -69,7 +69,7 @@ public class Game {
         }
 
         // Task 2 case 1
-        Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
+        Colour aiChoose = strategy.chooseColour(); // The AI's chosen colour
         Colour aiGuess = strategy.guessColour(); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
@@ -130,7 +130,7 @@ public class Game {
         }
 
         // Task 2 case 1
-        Colour aiChoose = strategy.setStrategy(); // The AI's chosen colour
+        Colour aiChoose = strategy.chooseColour(); // The AI's chosen colour
         Colour aiGuess = strategy.guessColour(); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
