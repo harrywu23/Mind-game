@@ -2,9 +2,11 @@ package nz.ac.auckland.se281.engine;
 
 import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
+import nz.ac.auckland.se281.model.AIDifficulty;
 import nz.ac.auckland.se281.model.AIStrategy;
 import nz.ac.auckland.se281.model.AvoidLastStrategy;
 import nz.ac.auckland.se281.model.Colour;
+import nz.ac.auckland.se281.model.DifficultyFactory;
 //import nz.ac.auckland.se281.model.DifficultyFactory;
 import nz.ac.auckland.se281.model.RandomStrategy;
 import nz.ac.auckland.se281.cli.Utils;
@@ -15,16 +17,17 @@ public class Game {
   public static String AI_NAME = "HAL-9000";
   private int numRounds;
   private int currentRound = 1;
-  private Difficulty gameDifficulty;
+  private Difficulty difficulty;
   private int aiRoundPoints;
   private int playerRoundPoints;
   private Colour powerColour;
   private Player player;
   private Colour chosenPlayerColour;
+  private AIDifficulty Ai;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
-    this.gameDifficulty = difficulty;
+    this.difficulty = difficulty;
     this.currentRound = 1;
 
     // task 1 case 1
@@ -43,6 +46,7 @@ public class Game {
     }
 
     // AIStrategy strategy = new AvoidLastStrategy(player);
+    Ai = DifficultyFactory.createAI(difficulty);
     AIStrategy strategy = new RandomStrategy();
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
 
@@ -166,10 +170,6 @@ public class Game {
   }
 
   public void showStats() {
-  }
-
-  public Difficulty getGameDifficulty() {
-    return this.gameDifficulty;
   }
 
   public int getCurrentRound() {

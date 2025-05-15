@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281.model;
-
+import nz.ac.auckland.se281.Main.Difficulty;
 public class DifficultyFactory {
 
-  public static AIDifficulty selectDifficulty(String type) {
+  public static AIDifficulty createAI(Difficulty type) {
     switch (type) {
-      case "EASY":
+      case EASY:
         return new Easy();
 
       // case "MEDIUM":
