@@ -42,7 +42,7 @@ public class Game {
       return;
     }
 
-    // AIStrategy strategy = new AvoidLastStrategy(this);
+    // AIStrategy strategy = new AvoidLastStrategy(player);
     AIStrategy strategy = new RandomStrategy();
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
 
