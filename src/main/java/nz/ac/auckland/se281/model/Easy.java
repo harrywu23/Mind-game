@@ -4,7 +4,7 @@ public class Easy implements AIDifficulty {
 
   private AIStrategy strategy;
 
-  public Easy() {
+  public Easy(AIStrategy strategy) {
     this.strategy = new RandomStrategy();
     // pass in AIStrategy so I can access strategy methods guess and choose
     // (getAicolour,getplayercolour)

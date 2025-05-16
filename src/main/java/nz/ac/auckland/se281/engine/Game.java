@@ -20,7 +20,7 @@ public class Game {
   private Colour powerColour;
   private Player player;
   private Colour chosenPlayerColour;
-  private AIDifficulty difficultyPicker;
+  private AIDifficulty AI;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -43,7 +43,7 @@ public class Game {
     }
 
     // AIStrategy strategy = new AvoidLastStrategy(player);
-    difficultyPicker = DifficultyFactory.createAI(difficulty);
+    AI = DifficultyFactory.createAI(difficulty);
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
     Colour lastColour = chosenPlayerColour;
 
@@ -74,8 +74,8 @@ public class Game {
         }
 
         // Task 2 case 1
-        Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = difficultyPicker.guessColour(currentRound, lastColour); // The AI's guessed colour
+        Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
+        Colour aiGuess = AI.guessColour(currentRound, lastColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -135,8 +135,8 @@ public class Game {
         }
 
         // Task 2 case 1
-        Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = difficultyPicker.guessColour(currentRound, lastColour); // The AI's guessed colour
+        Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
+        Colour aiGuess = AI.guessColour(currentRound, lastColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -162,7 +162,6 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
     }
-    player.setLastChosenColour(this.chosenPlayerColour);
     currentRound++;
   }
 

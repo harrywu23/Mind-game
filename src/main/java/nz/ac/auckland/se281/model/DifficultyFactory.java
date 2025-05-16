@@ -7,7 +7,7 @@ public class DifficultyFactory {
   public static AIDifficulty createAI(Difficulty type) {
     switch (type) {
       case EASY:
-        return new Easy();
+        return new Easy(new RandomStrategy());
 
       case MEDIUM:
         return new Medium(new AvoidLastStrategy());
