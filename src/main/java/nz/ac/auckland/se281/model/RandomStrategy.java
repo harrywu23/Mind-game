@@ -7,7 +7,7 @@ public class RandomStrategy implements AIStrategy {
     return Colour.getRandomColourForAi();
   }
 
-  public Colour getAiGuess() {
+  public Colour getAiGuess(Colour lastChosenColour) {
     return Colour.getRandomColourForAi();
   }
 }

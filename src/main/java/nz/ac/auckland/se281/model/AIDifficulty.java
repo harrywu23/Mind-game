@@ -2,7 +2,7 @@ package nz.ac.auckland.se281.model;
 
 public interface AIDifficulty {
   public Colour chooseColour();
-  public Colour guessColour(int currentRound);
+  public Colour guessColour(int currentRound, Colour lastChosenColour);
   public void setStrategy(AIStrategy strategy);
 
   // add choose and guess methods 

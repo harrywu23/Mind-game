@@ -45,6 +45,7 @@ public class Game {
     // AIStrategy strategy = new AvoidLastStrategy(player);
     difficultyPicker = DifficultyFactory.createAI(difficulty);
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
+    Colour lastColour = chosenPlayerColour;
 
     // if power round
     if (currentRound % 3 == 0 && currentRound != 0)
@@ -74,7 +75,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = difficultyPicker.guessColour(currentRound); // The AI's guessed colour
+        Colour aiGuess = difficultyPicker.guessColour(currentRound, lastColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -135,7 +136,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = difficultyPicker.guessColour(currentRound); // The AI's guessed colour
+        Colour aiGuess = difficultyPicker.guessColour(currentRound, lastColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
