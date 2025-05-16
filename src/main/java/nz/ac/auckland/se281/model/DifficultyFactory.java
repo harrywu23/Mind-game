@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281.model;
+
 import nz.ac.auckland.se281.Main.Difficulty;
+
 public class DifficultyFactory {
 
   public static AIDifficulty createAI(Difficulty type) {
@@ -7,8 +9,8 @@ public class DifficultyFactory {
       case EASY:
         return new Easy();
 
-      // case "MEDIUM":
-      // return new Medium();
+      case MEDIUM:
+        return new Medium(new AvoidLastStrategy());
 
       // case "HARD":
       // return new Hard();

@@ -6,8 +6,7 @@ public class AvoidLastStrategy implements AIStrategy {
 
   private Player player;
 
-  public AvoidLastStrategy(Player player) {
-    this.player = player;
+  public AvoidLastStrategy() {
   }
 
   @Override

@@ -74,7 +74,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = difficultyPicker.guessColour(); // The AI's guessed colour
+        Colour aiGuess = difficultyPicker.guessColour(currentRound); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -135,7 +135,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = difficultyPicker.guessColour(); // The AI's guessed colour
+        Colour aiGuess = difficultyPicker.guessColour(currentRound); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 

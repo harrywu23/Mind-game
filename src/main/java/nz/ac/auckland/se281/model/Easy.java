@@ -17,7 +17,7 @@ public class Easy implements AIDifficulty {
   }
 
   @Override
-  public Colour guessColour() {
+  public Colour guessColour(int currentRound) {
     return strategy.getAiGuess();
 
   }
