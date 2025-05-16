@@ -3,12 +3,9 @@ package nz.ac.auckland.se281.engine;
 import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
 import nz.ac.auckland.se281.model.AIDifficulty;
-import nz.ac.auckland.se281.model.AIStrategy;
-import nz.ac.auckland.se281.model.AvoidLastStrategy;
 import nz.ac.auckland.se281.model.Colour;
 import nz.ac.auckland.se281.model.DifficultyFactory;
 //import nz.ac.auckland.se281.model.DifficultyFactory;
-import nz.ac.auckland.se281.model.RandomStrategy;
 import nz.ac.auckland.se281.cli.Utils;
 //import nz.ac.auckland.se281.model.AIDifficulty;
 
@@ -23,7 +20,7 @@ public class Game {
   private Colour powerColour;
   private Player player;
   private Colour chosenPlayerColour;
-  private AIDifficulty Ai;
+  private AIDifficulty difficultyPicker;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -46,8 +43,7 @@ public class Game {
     }
 
     // AIStrategy strategy = new AvoidLastStrategy(player);
-    Ai = DifficultyFactory.createAI(difficulty);
-    AIStrategy strategy = new RandomStrategy();
+    difficultyPicker = DifficultyFactory.createAI(difficulty);
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
 
     // if power round
@@ -77,8 +73,8 @@ public class Game {
         }
 
         // Task 2 case 1
-        Colour aiChoose = strategy.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = strategy.guessColour(); // The AI's guessed colour
+        Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
+        Colour aiGuess = difficultyPicker.guessColour(); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -138,8 +134,8 @@ public class Game {
         }
 
         // Task 2 case 1
-        Colour aiChoose = strategy.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = strategy.guessColour(); // The AI's guessed colour
+        Colour aiChoose = difficultyPicker.chooseColour(); // The AI's chosen colour
+        Colour aiGuess = difficultyPicker.guessColour(); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 

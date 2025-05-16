@@ -11,12 +11,12 @@ public class AvoidLastStrategy implements AIStrategy {
   }
 
   @Override
-  public Colour chooseColour() {
+  public Colour getAiColour() {
     return Colour.getRandomColourForAi();
   }
 
   @Override
-  public Colour guessColour() {
+  public Colour getAiGuess() {
     Colour lastColour = player.getLastChosenColour();
     return Colour.getRandomColourExcluding(lastColour);
   }
