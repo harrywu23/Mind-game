@@ -2,9 +2,9 @@ package nz.ac.auckland.se281.model;
 
 public class EasyDifficulty implements DifficultyLevel {
 
-  private AiStrategy strategy;
+  private AIStrategy strategy;
 
-  public EasyDifficulty(AiStrategy strategy) {
+  public EasyDifficulty(AIStrategy strategy) {
     this.strategy = new RandomStrategy();
     // pass in AIStrategy so I can access strategy methods guess and choose
     // (getAicolour,getplayercolour)
@@ -23,7 +23,7 @@ public class EasyDifficulty implements DifficultyLevel {
   }
 
   @Override
-  public void setStrategy(AiStrategy strategy) {
+  public void setStrategy(AIStrategy strategy) {
     this.strategy = strategy;
   }
 }

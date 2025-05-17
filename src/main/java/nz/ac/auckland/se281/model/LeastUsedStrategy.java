@@ -3,7 +3,7 @@ package nz.ac.auckland.se281.model;
 import java.util.ArrayList;
 import nz.ac.auckland.se281.engine.Game;
 
-public class LeastUsedStrategy implements AiStrategy {
+public class LeastUsedStrategy implements AIStrategy {
 
   private Game game;
 

@@ -2,11 +2,11 @@ package nz.ac.auckland.se281.model;
 
 public class MediumDifficulty implements DifficultyLevel {
 
-  private AiStrategy strategy;
+  private AIStrategy strategy;
   private RandomStrategy easyStrategy;
   private AvoidLastStrategy mediumStrategy;
 
-  public MediumDifficulty(AiStrategy strategy) {
+  public MediumDifficulty(AIStrategy strategy) {
     this.strategy = strategy;
     this.easyStrategy = new RandomStrategy();
     this.mediumStrategy = new AvoidLastStrategy();
@@ -27,7 +27,7 @@ public class MediumDifficulty implements DifficultyLevel {
   }
 
   @Override
-  public void setStrategy(AiStrategy strategy) {
+  public void setStrategy(AIStrategy strategy) {
     this.strategy = strategy;
   }
 }
