@@ -28,6 +28,7 @@ public class Game {
   private boolean gameStart = false;
   private int playerTotalPoints;
   private int aiTotalPoints;
+  private String winner;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     gameStart = true;
@@ -37,6 +38,7 @@ public class Game {
     historyOfColours = new ArrayList<>();
     this.aiTotalPoints = 0;
     this.playerTotalPoints = 0;
+    this.winner = null;
 
     AI = DifficultyFactory.createAI(difficulty, this);
 
@@ -202,6 +204,12 @@ public class Game {
     if (currentRound > numRounds) {
       showStats();
       MessageCli.PRINT_END_GAME.printMessage();
+      if (this.getAiTotalPoints() > this.getPlayerTotalPoints()) {
+        winner = Game.getAI_NAME();
+      } else {
+        winner = player.getName();
+      }
+      MessageCli.PRINT_WINNER_GAME.printMessage(winner);
     }
   }
 
@@ -257,5 +265,13 @@ public class Game {
 
   public int getAiTotalPoints() {
     return aiTotalPoints;
+  }
+
+  public static String getAI_NAME() {
+    return AI_NAME;
+  }
+
+  public String getWinnerName() {
+    return winner;
   }
 }
