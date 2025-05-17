@@ -47,7 +47,7 @@ public class Game {
     }
 
     // AIStrategy strategy = new AvoidLastStrategy(player);
-    AI = DifficultyFactory.createAI(difficulty);
+    AI = DifficultyFactory.createAI(difficulty, this);
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
     // player's previous round choice, only updating outside of loop so we know
     // previous round colour
@@ -106,9 +106,9 @@ public class Game {
         }
 
         // AI guessing Player's colour
-        if (aiGuess.equals(chosen)) {
+        if (aiGuess != null && aiGuess.equals(chosen)) {
           aiRoundPoints += 1;
-          if (aiGuess.equals(powerColour)) {
+          if (aiGuess != null && aiGuess.equals(powerColour)) {
             aiRoundPoints += 2; // Bonus for guessing power colour (task 8 - 10)
           }
         }
@@ -156,12 +156,12 @@ public class Game {
         playerRoundPoints = 0;
         aiRoundPoints = 0;
 
-        if (aiGuess.equals(chosen) && guess.equals(aiChoose)) {
+        if (aiGuess != null && aiGuess.equals(chosen) && guess.equals(aiChoose)) {
           playerRoundPoints += 1;
           aiRoundPoints += 1;
         } else if (guess.equals(aiChoose)) {
           playerRoundPoints += 1;
-        } else if (aiGuess.equals(chosen)) {
+        } else if (aiGuess != null && aiGuess.equals(chosen)) {
           aiRoundPoints += 1;
         }
 

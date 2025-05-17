@@ -10,7 +10,7 @@ public class Hard implements AIDifficulty {
   private LeastUsedStrategy hardStrategy;
   private Game game;
 
-  public Hard(AIStrategy strategy) {
+  public Hard(Game game, AIStrategy strategy) {
     this.strategy = strategy;
     this.easyStrategy = new RandomStrategy();
     this.mediumStrategy = new AvoidLastStrategy();
