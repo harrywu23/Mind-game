@@ -25,22 +25,17 @@ public class Hard implements AIDifficulty {
 
   @Override
   public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
-    if (currentRound < 2) {
+    if (currentRound <= 2) {
       return easyStrategy.getAiGuess(lastChosenColour);
-    }
-    if (currentRound == 3) {
+    } else if (currentRound == 3) {
       return hardStrategy.getAiGuess(lastChosenColour);
-
-    }
-    if (currentRound > 4) {
+    } else {
       if (aiPointsLastRound == 0) {
         return mediumStrategy.getAiGuess(lastChosenColour);
       } else {
         return hardStrategy.getAiGuess(lastChosenColour);
       }
-
     }
-    return easyStrategy.getAiGuess(lastChosenColour);
   }
 
   @Override
