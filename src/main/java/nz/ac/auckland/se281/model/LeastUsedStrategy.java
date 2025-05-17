@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class LeastUsedStrategy implements AIStrategy {
 
+  private AIStrategy strategy;
   private Game game;
 
   public LeastUsedStrategy(Game game) {
@@ -14,6 +15,12 @@ public class LeastUsedStrategy implements AIStrategy {
   @Override
   public Colour getAiColour() {
     return Colour.getRandomColourForAi();
+  }
+
+  @Override
+  public AIStrategy setStrategy(AIStrategy strategy) {
+    this.strategy = strategy;
+    return strategy;
   }
 
   @Override

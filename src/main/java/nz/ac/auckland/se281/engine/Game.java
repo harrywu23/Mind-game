@@ -54,7 +54,6 @@ public class Game {
     // previous round colour
     Colour lastRoundColour = this.chosenPlayerColour;
     historyOfColours.add(lastRoundColour);
-    aiPointsLastRound = 1;
 
     // if power round
     if (currentRound % 3 == 0 && currentRound != 0)

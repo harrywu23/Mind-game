@@ -8,6 +8,7 @@ public class Hard implements AIDifficulty {
   private RandomStrategy easyStrategy;
   private AvoidLastStrategy mediumStrategy;
   private LeastUsedStrategy hardStrategy;
+  private AIStrategy currentStrategy;
 
   public Hard(Game game, AIStrategy strategy) {
     this.strategy = strategy;
@@ -25,21 +26,29 @@ public class Hard implements AIDifficulty {
 
   @Override
   public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
+
+    // use currentStrategy.setStrategy() later
     if (currentRound <= 2) {
-      return easyStrategy.getAiGuess(lastChosenColour);
+      currentStrategy = easyStrategy;
     } else if (currentRound == 3) {
-      return hardStrategy.getAiGuess(lastChosenColour);
+      currentStrategy = hardStrategy;
     } else {
+      // points scored = 0;
       if (aiPointsLastRound == 0) {
-        return mediumStrategy.getAiGuess(lastChosenColour);
-      } else {
-        return hardStrategy.getAiGuess(lastChosenColour);
+        if (currentStrategy == hardStrategy) {
+          currentStrategy = mediumStrategy;
+        } else if (currentStrategy == mediumStrategy) {
+          currentStrategy = hardStrategy;
+        }
+        // if points scored > 0
+      } else if (aiPointsLastRound >= 1) {
+        if (currentStrategy == mediumStrategy) {
+          currentStrategy = mediumStrategy;
+        } else if (currentStrategy == hardStrategy) {
+          currentStrategy = hardStrategy;
+        }
       }
     }
-  }
-
-  @Override
-  public void setStrategy(AIStrategy strategy) {
-    this.strategy = strategy;
+    return currentStrategy.getAiGuess(lastChosenColour);
   }
 }

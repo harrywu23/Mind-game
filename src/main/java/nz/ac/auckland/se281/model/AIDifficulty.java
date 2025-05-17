@@ -5,8 +5,6 @@ public interface AIDifficulty {
 
   public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound);
 
-  public void setStrategy(AIStrategy strategy);
-
   // add choose and guess methods
   // pass in Game game, guess(game) - for getting round, FOR MEDIUM
 }
