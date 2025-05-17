@@ -25,4 +25,9 @@ public class Medium implements AIDifficulty {
     }
     return easyStrategy.getAiGuess(lastChosenColour);
   }
+
+  @Override
+  public void setStrategy(AIStrategy strategy) {
+    this.strategy = strategy;
+  }
 }

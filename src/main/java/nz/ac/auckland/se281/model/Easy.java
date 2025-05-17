@@ -21,4 +21,9 @@ public class Easy implements AIDifficulty {
     return strategy.getAiGuess(lastChosenColour);
 
   }
+
+  @Override
+  public void setStrategy(AIStrategy strategy) {
+    this.strategy = strategy;
+  }
 }

@@ -24,6 +24,11 @@ public class Hard implements AIDifficulty {
   }
 
   @Override
+  public void setStrategy(AIStrategy strategy) {
+    this.strategy = strategy;
+  }
+
+  @Override
   public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
 
     // use currentStrategy.setStrategy() later
