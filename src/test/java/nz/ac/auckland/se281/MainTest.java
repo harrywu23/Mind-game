@@ -14,11 +14,11 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-  MainTest.Task1.class,
-  MainTest.Task2.class,
-  // MainTest.Task3.class,
-  // MainTest.Task4.class,
-  // MainTest.Task5.class
+    MainTest.Task1.class,
+    MainTest.Task2.class,
+    MainTest.Task3.class,
+    MainTest.Task4.class,
+    MainTest.Task5.class
 })
 public class MainTest {
 
@@ -679,7 +679,7 @@ public class MainTest {
           "G G", // Round 5 - do not change stategy
           PLAY,
           "R R" // Round 6 - change again, bexause it lost
-          );
+      );
       // Round 1
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "BLUE", "GREEN"), 1);
       assertContainsAtRound(PRINT_OUTCOME_ROUND.getMessage("Valerio", 0), 1);
@@ -736,7 +736,7 @@ public class MainTest {
           "R B", // Round 7
           PLAY,
           "R B" // Round 8
-          );
+      );
       // Round 1
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "GREEN", "RED"), 1);
       assertContainsAtRound(PRINT_OUTCOME_ROUND.getMessage("Valerio", 0), 1);
@@ -875,7 +875,7 @@ public class MainTest {
           "B R", // Round 2
           PLAY,
           "Y G" // Round 3
-          );
+      );
 
       // Check game started correctly
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -917,7 +917,7 @@ public class MainTest {
           "B R", // Round 2
           PLAY,
           "Y G" // Round 3
-          );
+      );
 
       // Check game started correctly
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -959,7 +959,7 @@ public class MainTest {
           "Y G", // Round 3
           PLAY,
           "B G" // Round 4
-          );
+      );
 
       // Game starts
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -1005,7 +1005,7 @@ public class MainTest {
           "Y R", // Round 3
           PLAY,
           "R G" // Round 4
-          );
+      );
 
       // Game starts
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -1080,6 +1080,7 @@ public class MainTest {
     }
 
     @Test
-    public void yourtest() throws Exception {}
+    public void yourtest() throws Exception {
+    }
   }
 }
