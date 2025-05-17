@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class LeastUsedStrategy implements AIStrategy {
 
-  private AIStrategy strategy;
   private Game game;
+  private AIStrategy strategy;
 
   public LeastUsedStrategy(Game game) {
     this.game = game;
@@ -52,6 +52,7 @@ public class LeastUsedStrategy implements AIStrategy {
       }
     }
 
+    // start R,G,B,Y
     Colour leastUsed = Colour.RED;
     int minCount = redCount;
 

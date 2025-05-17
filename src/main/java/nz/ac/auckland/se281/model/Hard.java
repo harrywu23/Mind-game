@@ -21,7 +21,6 @@ public class Hard implements AIDifficulty {
   @Override
   public Colour chooseColour() {
     return strategy.getAiColour();
-
   }
 
   @Override
