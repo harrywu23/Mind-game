@@ -58,7 +58,7 @@ public class Game {
     }
 
     if (currentRound > numRounds) {
-      this.showStats();
+      return;
     }
 
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
@@ -198,6 +198,11 @@ public class Game {
       }
     }
     currentRound++;
+
+    if (currentRound > numRounds) {
+      showStats();
+      MessageCli.PRINT_END_GAME.printMessage();
+    }
   }
 
   public void showStats() {
@@ -208,6 +213,10 @@ public class Game {
 
     MessageCli.PRINT_PLAYER_POINTS.printMessage(player.getName(), this.getPlayerTotalPoints());
     MessageCli.PRINT_PLAYER_POINTS.printMessage(AI_NAME, this.getAiTotalPoints());
+
+    if (this.getAiTotalPoints() == this.getPlayerTotalPoints()) {
+      MessageCli.PRINT_TIE_GAME.printMessage();
+    }
   }
 
   public int getCurrentRound() {
