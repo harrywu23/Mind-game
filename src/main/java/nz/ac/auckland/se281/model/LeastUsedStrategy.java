@@ -25,7 +25,7 @@ public class LeastUsedStrategy implements AIStrategy {
 
   @Override
   public Colour getAiGuess(Colour lastChosenColour) {
-    ArrayList<Colour> history = game.getHistoryOfColours();
+    ArrayList<Colour> playerColourHistory = game.getHistoryOfColours();
 
     // reset count every time the method is called
 
@@ -36,7 +36,7 @@ public class LeastUsedStrategy implements AIStrategy {
 
     // checking which colour has been used the least
 
-    for (Colour currentColour : history) {
+    for (Colour currentColour : playerColourHistory) {
       if (currentColour == null) {
         continue;
       }

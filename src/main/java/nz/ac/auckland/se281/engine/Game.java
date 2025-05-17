@@ -25,8 +25,10 @@ public class Game {
   private AIDifficulty AI;
   private ArrayList<Colour> historyOfColours;
   private int aiPointsLastRound = -1;
+  private boolean gameStart = false;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
+    gameStart = true;
     this.numRounds = numRounds;
     this.difficulty = difficulty;
     this.currentRound = 1;
@@ -45,6 +47,12 @@ public class Game {
 
   public void play() {
 
+    // if play is called before a new game has been started
+    if (!gameStart) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
     if (currentRound > numRounds) {
       return;
     }
@@ -56,9 +64,8 @@ public class Game {
     historyOfColours.add(lastRoundColour);
 
     // if power round
-    if (currentRound % 3 == 0 && currentRound != 0)
+    if (currentRound % 3 == 0 && currentRound != 0) {
 
-    {
       boolean validInput = false;
 
       while (!validInput) {
@@ -182,6 +189,10 @@ public class Game {
   }
 
   public void showStats() {
+    if (!gameStart) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
   }
 
   public int getCurrentRound() {
