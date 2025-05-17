@@ -26,6 +26,8 @@ public class Game {
   private ArrayList<Colour> historyOfColours;
   private int aiPointsLastRound = -1;
   private boolean gameStart = false;
+  private int playerTotalPoints;
+  private int aiTotalPoints;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     gameStart = true;
@@ -33,6 +35,8 @@ public class Game {
     this.difficulty = difficulty;
     this.currentRound = 1;
     historyOfColours = new ArrayList<>();
+    this.aiTotalPoints = 0;
+    this.playerTotalPoints = 0;
 
     AI = DifficultyFactory.createAI(difficulty, this);
 
@@ -193,6 +197,14 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
+    for (int i = 0; i < numRounds; i++) {
+      aiTotalPoints += aiRoundPoints;
+      playerTotalPoints += playerRoundPoints;
+    }
+
+    MessageCli.PRINT_PLAYER_POINTS.printMessage(player.getName(), playerTotalPoints);
+    MessageCli.PRINT_PLAYER_POINTS.printMessage(AI_NAME, aiTotalPoints);
   }
 
   public int getCurrentRound() {
@@ -225,5 +237,13 @@ public class Game {
 
   public Difficulty getDifficulty() {
     return difficulty;
+  }
+
+  public int getPlayerTotalPoints() {
+    return playerTotalPoints;
+  }
+
+  public int getAiTotalPoints() {
+    return aiTotalPoints;
   }
 }
