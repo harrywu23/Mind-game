@@ -12,8 +12,8 @@ public class DifficultyFactory {
       case MEDIUM:
         return new Medium(new AvoidLastStrategy());
 
-      // case "HARD":
-      // return new Hard();
+      case HARD:
+        return new Hard((new LeastUsedStrategy(null)));
 
       default:
         System.exit(0); // this is bad! it's there because we did not cover exceptions yet :)

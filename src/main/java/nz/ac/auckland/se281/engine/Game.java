@@ -23,12 +23,13 @@ public class Game {
   private Player player;
   private Colour chosenPlayerColour;
   private AIDifficulty AI;
-  private ArrayList<Colour> historyOfColours = new ArrayList<>();
+  private ArrayList<Colour> historyOfColours;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
     this.difficulty = difficulty;
     this.currentRound = 1;
+    historyOfColours = new ArrayList<>();
 
     // task 1 case 1
     if (options.length > 0) {
@@ -184,5 +185,13 @@ public class Game {
 
   public Colour getChosenPlayerColour() {
     return this.chosenPlayerColour;
+  }
+
+  public ArrayList<Colour> getHistoryOfColours() {
+    return historyOfColours;
+  }
+
+  public int getListSize() {
+    return historyOfColours.size();
   }
 }
