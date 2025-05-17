@@ -1,15 +1,12 @@
 package nz.ac.auckland.se281.engine;
 
 import java.util.ArrayList;
-
 import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
-import nz.ac.auckland.se281.model.AIDifficulty;
+import nz.ac.auckland.se281.cli.Utils;
 import nz.ac.auckland.se281.model.Colour;
 import nz.ac.auckland.se281.model.DifficultyFactory;
-//import nz.ac.auckland.se281.model.DifficultyFactory;
-import nz.ac.auckland.se281.cli.Utils;
-//import nz.ac.auckland.se281.model.AIDifficulty;
+import nz.ac.auckland.se281.model.DifficultyLevel;
 
 public class Game {
 
@@ -22,7 +19,7 @@ public class Game {
   private Colour powerColour;
   private Player player;
   private Colour chosenPlayerColour;
-  private AIDifficulty AI;
+  private DifficultyLevel Ai;
   private ArrayList<Colour> historyOfColours;
   private int aiPointsLastRound = -1;
   private boolean gameStart = false;
@@ -40,9 +37,10 @@ public class Game {
     this.playerTotalPoints = 0;
     this.winner = null;
 
-    AI = DifficultyFactory.createAI(difficulty, this);
+    // Create AI based on difficulty using factory
+    Ai = DifficultyFactory.createAi(difficulty, this);
 
-    // task 1 case 1
+    // Check if player name is provided
     if (options.length > 0) {
       String playerName = options[0];
       player = new Player(playerName);
@@ -59,18 +57,18 @@ public class Game {
       return;
     }
 
+    // If all rounds have been played already
     if (currentRound > numRounds) {
       MessageCli.PRINT_END_GAME.printMessage();
       return;
     }
 
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
-    // player's previous round choice, only updating outside of loop so we know
-    // previous round colour
+    // Track player's last round colour
     Colour lastRoundColour = this.chosenPlayerColour;
     historyOfColours.add(lastRoundColour);
 
-    // if power round
+    // POWER ROUND
     if (currentRound % 3 == 0 && currentRound != 0) {
 
       boolean validInput = false;
@@ -95,9 +93,9 @@ public class Game {
           continue;
         }
 
-        // Task 2 case 1
-        Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
+        // AI makes its move and guess
+        Colour aiChoose = Ai.chooseColour(); // The AI's chosen colour
+        Colour aiGuess = Ai.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -108,7 +106,7 @@ public class Game {
 
         // point scoring logic task 2 test 4 - test 7
 
-        // resetting points to 0 each round
+        // Resetting round points
         playerRoundPoints = 0;
         aiRoundPoints = 0;
 
@@ -128,19 +126,18 @@ public class Game {
           }
         }
 
-        // accumulating total points for player and ai
+        // Update total points
         playerTotalPoints += playerRoundPoints;
         aiTotalPoints += aiRoundPoints;
 
-        // setting aiPointsLastRound to the points AI got this round so we can access
-        // them for the hard strategy
+        // Store AI's points for this round for hard strategy logic
         setaiPointsLastRound(aiRoundPoints);
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(player.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
 
-      // not power round
+      // Non-power rounds
     } else if (!(currentRound % 3 == 0)) {
       boolean validInput = false;
 
@@ -164,9 +161,9 @@ public class Game {
           continue;
         }
 
-        // Task 2 case 1
-        Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
+        // AI's move and guess
+        Colour aiChoose = Ai.chooseColour(); // The AI's chosen colour
+        Colour aiGuess = Ai.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -175,10 +172,11 @@ public class Game {
 
         // point scoring logic task 2 test 4 - test 7
 
-        // resetting points to 0 each round
+        // Resetting round points
         playerRoundPoints = 0;
         aiRoundPoints = 0;
 
+        // Logic for scoring in non-power rounds
         if (aiGuess != null && aiGuess.equals(chosen) && guess.equals(aiChoose)) {
           playerRoundPoints += 1;
           aiRoundPoints += 1;
@@ -188,25 +186,26 @@ public class Game {
           aiRoundPoints += 1;
         }
 
-        // accumulating total points for player and ai
+        // Update total points
         playerTotalPoints += playerRoundPoints;
         aiTotalPoints += aiRoundPoints;
 
-        // setting aiPointsLastRound to the points AI got this round so we can access
-        // them for the hard strategy
+        // Store AI's points for this round for hard strategy logic
         setaiPointsLastRound(aiRoundPoints);
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(player.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
     }
+
     currentRound++;
 
+    // After final round, show stats and declare winner
     if (currentRound > numRounds) {
       showStats();
       MessageCli.PRINT_END_GAME.printMessage();
       if (this.getAiTotalPoints() > this.getPlayerTotalPoints()) {
-        winner = Game.getAI_NAME();
+        winner = AI_NAME;
         MessageCli.PRINT_WINNER_GAME.printMessage(winner);
       } else if (this.getAiTotalPoints() < this.getPlayerTotalPoints()) {
         winner = player.getName();
@@ -224,6 +223,7 @@ public class Game {
     MessageCli.PRINT_PLAYER_POINTS.printMessage(player.getName(), this.getPlayerTotalPoints());
     MessageCli.PRINT_PLAYER_POINTS.printMessage(AI_NAME, this.getAiTotalPoints());
 
+    // When the game ends in a tie
     if (this.getAiTotalPoints() == this.getPlayerTotalPoints()) {
       MessageCli.PRINT_TIE_GAME.printMessage();
     }
@@ -267,10 +267,6 @@ public class Game {
 
   public int getAiTotalPoints() {
     return aiTotalPoints;
-  }
-
-  public static String getAI_NAME() {
-    return AI_NAME;
   }
 
   public String getWinnerName() {

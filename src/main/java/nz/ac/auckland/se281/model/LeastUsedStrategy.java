@@ -1,9 +1,9 @@
 package nz.ac.auckland.se281.model;
 
-import nz.ac.auckland.se281.engine.Game;
 import java.util.ArrayList;
+import nz.ac.auckland.se281.engine.Game;
 
-public class LeastUsedStrategy implements AIStrategy {
+public class LeastUsedStrategy implements AiStrategy {
 
   private Game game;
 

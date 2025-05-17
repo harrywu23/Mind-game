@@ -5,16 +5,16 @@ import nz.ac.auckland.se281.engine.Game;
 
 public class DifficultyFactory {
 
-  public static AIDifficulty createAI(Difficulty type, Game game) {
+  public static DifficultyLevel createAi(Difficulty type, Game game) {
     switch (type) {
       case EASY:
-        return new Easy(new RandomStrategy());
+        return new EasyDifficulty(new RandomStrategy());
 
       case MEDIUM:
-        return new Medium(new AvoidLastStrategy());
+        return new MediumDifficulty(new AvoidLastStrategy());
 
       case HARD:
-        return new Hard(game, (new LeastUsedStrategy(game)));
+        return new HardDifficulty(game, (new LeastUsedStrategy(game)));
 
       default:
         System.exit(0); // this is bad! it's there because we did not cover exceptions yet :)

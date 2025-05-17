@@ -58,7 +58,7 @@ public enum Colour {
         return YELLOW;
       default:
         return null; // I put null because we did not cover Exceptions yet (it would be better to
-        // use exception here :) ) but keep null for simplicity.
+      // use exception here :) ) but keep null for simplicity.
     }
   }
 }

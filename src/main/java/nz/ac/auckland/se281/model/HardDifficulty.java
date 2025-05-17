@@ -2,15 +2,15 @@ package nz.ac.auckland.se281.model;
 
 import nz.ac.auckland.se281.engine.Game;
 
-public class Hard implements AIDifficulty {
+public class HardDifficulty implements DifficultyLevel {
 
-  private AIStrategy strategy;
+  private AiStrategy strategy;
   private RandomStrategy easyStrategy;
   private AvoidLastStrategy mediumStrategy;
   private LeastUsedStrategy hardStrategy;
-  private AIStrategy currentStrategy;
+  private AiStrategy currentStrategy;
 
-  public Hard(Game game, AIStrategy strategy) {
+  public HardDifficulty(Game game, AiStrategy strategy) {
     this.strategy = strategy;
     this.easyStrategy = new RandomStrategy();
     this.mediumStrategy = new AvoidLastStrategy();
@@ -24,7 +24,7 @@ public class Hard implements AIDifficulty {
   }
 
   @Override
-  public void setStrategy(AIStrategy strategy) {
+  public void setStrategy(AiStrategy strategy) {
     this.strategy = strategy;
   }
 
