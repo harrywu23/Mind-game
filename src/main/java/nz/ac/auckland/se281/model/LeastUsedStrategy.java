@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class LeastUsedStrategy implements AIStrategy {
 
   private Game game;
-  private Colour leastUsed;
 
   public LeastUsedStrategy(Game game) {
     this.game = game;
@@ -20,12 +19,16 @@ public class LeastUsedStrategy implements AIStrategy {
   @Override
   public Colour getAiGuess(Colour lastChosenColour) {
     ArrayList<Colour> history = game.getHistoryOfColours();
+
+    // reset count every time the method is called
+
     int redCount = 0;
     int greenCount = 0;
     int blueCount = 0;
     int yellowCount = 0;
 
     // checking which colour has been used the least
+
     for (Colour currentColour : history) {
       if (currentColour == null) {
         continue;

@@ -24,12 +24,15 @@ public class Game {
   private Colour chosenPlayerColour;
   private AIDifficulty AI;
   private ArrayList<Colour> historyOfColours;
+  private int aiPointsLastRound = -1;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
     this.difficulty = difficulty;
     this.currentRound = 1;
     historyOfColours = new ArrayList<>();
+
+    AI = DifficultyFactory.createAI(difficulty, this);
 
     // task 1 case 1
     if (options.length > 0) {
@@ -46,13 +49,12 @@ public class Game {
       return;
     }
 
-    // AIStrategy strategy = new AvoidLastStrategy(player);
-    AI = DifficultyFactory.createAI(difficulty, this);
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
     // player's previous round choice, only updating outside of loop so we know
     // previous round colour
     Colour lastRoundColour = this.chosenPlayerColour;
     historyOfColours.add(lastRoundColour);
+    aiPointsLastRound = 1;
 
     // if power round
     if (currentRound % 3 == 0 && currentRound != 0)
@@ -82,7 +84,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour); // The AI's guessed colour
+        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -112,6 +114,10 @@ public class Game {
             aiRoundPoints += 2; // Bonus for guessing power colour (task 8 - 10)
           }
         }
+
+        // setting aiPointsLastRound to the points AI got this round so we can access
+        // them for the hard strategy
+        setaiPointsLastRound(aiRoundPoints);
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(player.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
@@ -143,7 +149,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour); // The AI's guessed colour
+        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -164,6 +170,10 @@ public class Game {
         } else if (aiGuess != null && aiGuess.equals(chosen)) {
           aiRoundPoints += 1;
         }
+
+        // setting aiPointsLastRound to the points AI got this round so we can access
+        // them for the hard strategy
+        setaiPointsLastRound(aiRoundPoints);
 
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(player.getName(), String.valueOf(playerRoundPoints));
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
@@ -193,5 +203,17 @@ public class Game {
 
   public int getListSize() {
     return historyOfColours.size();
+  }
+
+  public void setaiPointsLastRound(int aiPointsLastRound) {
+    this.aiPointsLastRound = aiPointsLastRound;
+  }
+
+  public int getAiPointsLastRound() {
+    return aiPointsLastRound;
+  }
+
+  public Difficulty getDifficulty() {
+    return difficulty;
   }
 }

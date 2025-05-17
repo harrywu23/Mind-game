@@ -19,7 +19,7 @@ public class Medium implements AIDifficulty {
   }
 
   @Override
-  public Colour guessColour(int currentRound, Colour lastChosenColour) {
+  public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
     if (currentRound > 1) {
       return mediumStrategy.getAiGuess(lastChosenColour);
     }
