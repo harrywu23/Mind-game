@@ -58,7 +58,7 @@ public class Game {
     }
 
     if (currentRound > numRounds) {
-      return;
+      this.showStats();
     }
 
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
@@ -125,6 +125,10 @@ public class Game {
           }
         }
 
+        // accumulating total points for player and ai
+        playerTotalPoints += playerRoundPoints;
+        aiTotalPoints += aiRoundPoints;
+
         // setting aiPointsLastRound to the points AI got this round so we can access
         // them for the hard strategy
         setaiPointsLastRound(aiRoundPoints);
@@ -181,6 +185,10 @@ public class Game {
           aiRoundPoints += 1;
         }
 
+        // accumulating total points for player and ai
+        playerTotalPoints += playerRoundPoints;
+        aiTotalPoints += aiRoundPoints;
+
         // setting aiPointsLastRound to the points AI got this round so we can access
         // them for the hard strategy
         setaiPointsLastRound(aiRoundPoints);
@@ -198,13 +206,8 @@ public class Game {
       return;
     }
 
-    for (int i = 0; i < numRounds; i++) {
-      aiTotalPoints += aiRoundPoints;
-      playerTotalPoints += playerRoundPoints;
-    }
-
-    MessageCli.PRINT_PLAYER_POINTS.printMessage(player.getName(), playerTotalPoints);
-    MessageCli.PRINT_PLAYER_POINTS.printMessage(AI_NAME, aiTotalPoints);
+    MessageCli.PRINT_PLAYER_POINTS.printMessage(player.getName(), this.getPlayerTotalPoints());
+    MessageCli.PRINT_PLAYER_POINTS.printMessage(AI_NAME, this.getAiTotalPoints());
   }
 
   public int getCurrentRound() {
