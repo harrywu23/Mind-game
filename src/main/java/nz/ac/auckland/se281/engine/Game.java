@@ -60,6 +60,7 @@ public class Game {
     }
 
     if (currentRound > numRounds) {
+      MessageCli.PRINT_END_GAME.printMessage();
       return;
     }
 
@@ -206,10 +207,11 @@ public class Game {
       MessageCli.PRINT_END_GAME.printMessage();
       if (this.getAiTotalPoints() > this.getPlayerTotalPoints()) {
         winner = Game.getAI_NAME();
-      } else {
+        MessageCli.PRINT_WINNER_GAME.printMessage(winner);
+      } else if (this.getAiTotalPoints() < this.getPlayerTotalPoints()) {
         winner = player.getName();
+        MessageCli.PRINT_WINNER_GAME.printMessage(winner);
       }
-      MessageCli.PRINT_WINNER_GAME.printMessage(winner);
     }
   }
 
