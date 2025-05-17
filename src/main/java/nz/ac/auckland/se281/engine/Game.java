@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281.engine;
 
+import java.util.ArrayList;
+
 import nz.ac.auckland.se281.Main.Difficulty;
 import nz.ac.auckland.se281.cli.MessageCli;
 import nz.ac.auckland.se281.model.AIDifficulty;
@@ -21,6 +23,7 @@ public class Game {
   private Player player;
   private Colour chosenPlayerColour;
   private AIDifficulty AI;
+  private ArrayList<Colour> historyOfColours = new ArrayList<>();
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     this.numRounds = numRounds;
@@ -45,7 +48,10 @@ public class Game {
     // AIStrategy strategy = new AvoidLastStrategy(player);
     AI = DifficultyFactory.createAI(difficulty);
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
-    Colour lastColour = chosenPlayerColour;
+    // player's previous round choice, only updating outside of loop so we know
+    // previous round colour
+    Colour lastRoundColour = this.chosenPlayerColour;
+    historyOfColours.add(lastRoundColour);
 
     // if power round
     if (currentRound % 3 == 0 && currentRound != 0)
@@ -75,7 +81,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = AI.guessColour(currentRound, lastColour); // The AI's guessed colour
+        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -136,7 +142,7 @@ public class Game {
 
         // Task 2 case 1
         Colour aiChoose = AI.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = AI.guessColour(currentRound, lastColour); // The AI's guessed colour
+        Colour aiGuess = AI.guessColour(currentRound, lastRoundColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
