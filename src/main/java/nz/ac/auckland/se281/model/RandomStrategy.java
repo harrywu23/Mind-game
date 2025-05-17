@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281.model;
 
-public class RandomStrategy implements AIStrategy {
+public class RandomStrategy implements ArtificialIntelligenceStrategy {
 
   @Override
   public Colour getAiColour() {

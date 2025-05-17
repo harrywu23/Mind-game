@@ -4,13 +4,13 @@ import nz.ac.auckland.se281.engine.Game;
 
 public class HardDifficulty implements DifficultyLevel {
 
-  private AIStrategy strategy;
+  private ArtificialIntelligenceStrategy strategy;
   private RandomStrategy easyStrategy;
   private AvoidLastStrategy mediumStrategy;
   private LeastUsedStrategy hardStrategy;
-  private AIStrategy currentStrategy;
+  private ArtificialIntelligenceStrategy currentStrategy;
 
-  public HardDifficulty(Game game, AIStrategy strategy) {
+  public HardDifficulty(Game game, ArtificialIntelligenceStrategy strategy) {
     this.strategy = strategy;
     this.easyStrategy = new RandomStrategy();
     this.mediumStrategy = new AvoidLastStrategy();
@@ -24,7 +24,7 @@ public class HardDifficulty implements DifficultyLevel {
   }
 
   @Override
-  public void setStrategy(AIStrategy strategy) {
+  public void setStrategy(ArtificialIntelligenceStrategy strategy) {
     this.strategy = strategy;
   }
 

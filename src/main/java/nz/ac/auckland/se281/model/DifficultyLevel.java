@@ -5,5 +5,5 @@ public interface DifficultyLevel {
 
   public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound);
 
-  public void setStrategy(AIStrategy strategy);
+  public void setStrategy(ArtificialIntelligenceStrategy strategy);
 }
