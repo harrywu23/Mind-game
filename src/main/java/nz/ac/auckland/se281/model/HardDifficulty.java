@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281.model;
 
-import nz.ac.auckland.se281.engine.Game;
+import java.util.ArrayList;
 
 public class HardDifficulty implements DifficultyLevel {
 
@@ -10,11 +10,11 @@ public class HardDifficulty implements DifficultyLevel {
   private LeastUsedStrategy hardStrategy;
   private ArtificialIntelligenceStrategy currentStrategy;
 
-  public HardDifficulty(Game game, ArtificialIntelligenceStrategy strategy) {
+  public HardDifficulty(ArrayList<Colour> historyOfColours, ArtificialIntelligenceStrategy strategy) {
     this.strategy = strategy;
     this.easyStrategy = new RandomStrategy();
     this.mediumStrategy = new AvoidLastStrategy();
-    this.hardStrategy = new LeastUsedStrategy(game);
+    this.hardStrategy = new LeastUsedStrategy(historyOfColours);
 
   }
 

@@ -38,7 +38,7 @@ public class Game {
     this.winner = null;
 
     // Create AI based on difficulty using factory
-    Ai = DifficultyFactory.createAi(difficulty, this);
+    Ai = DifficultyFactory.createAi(difficulty, historyOfColours);
 
     // Check if player name is provided
     if (options.length > 0) {

@@ -1,14 +1,13 @@
 package nz.ac.auckland.se281.model;
 
 import java.util.ArrayList;
-import nz.ac.auckland.se281.engine.Game;
 
 public class LeastUsedStrategy implements ArtificialIntelligenceStrategy {
 
-  private Game game;
+  private ArrayList<Colour> historyOfColours;
 
-  public LeastUsedStrategy(Game game) {
-    this.game = game;
+  public LeastUsedStrategy(ArrayList<Colour> historyOfColours) {
+    this.historyOfColours = historyOfColours;
   }
 
   @Override
@@ -18,7 +17,6 @@ public class LeastUsedStrategy implements ArtificialIntelligenceStrategy {
 
   @Override
   public Colour getAiGuess(Colour lastChosenColour) {
-    ArrayList<Colour> playerColourHistory = game.getHistoryOfColours();
 
     // reset count every time the method is called
 
@@ -29,7 +27,7 @@ public class LeastUsedStrategy implements ArtificialIntelligenceStrategy {
 
     // checking which colour has been used the least
 
-    for (Colour currentColour : playerColourHistory) {
+    for (Colour currentColour : historyOfColours) {
       if (currentColour == null) {
         continue;
       }

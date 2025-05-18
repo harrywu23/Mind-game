@@ -1,11 +1,12 @@
 package nz.ac.auckland.se281.model;
 
+import java.util.ArrayList;
+
 import nz.ac.auckland.se281.Main.Difficulty;
-import nz.ac.auckland.se281.engine.Game;
 
 public class DifficultyFactory {
 
-  public static DifficultyLevel createAi(Difficulty type, Game game) {
+  public static DifficultyLevel createAi(Difficulty type, ArrayList<Colour> historyOfColours) {
     switch (type) {
       case EASY:
         return new EasyDifficulty(new RandomStrategy());
@@ -14,7 +15,7 @@ public class DifficultyFactory {
         return new MediumDifficulty(new AvoidLastStrategy());
 
       case HARD:
-        return new HardDifficulty(game, (new LeastUsedStrategy(game)));
+        return new HardDifficulty(historyOfColours, (new LeastUsedStrategy(historyOfColours)));
 
       default:
         System.exit(0); // this is bad! it's there because we did not cover exceptions yet :)
