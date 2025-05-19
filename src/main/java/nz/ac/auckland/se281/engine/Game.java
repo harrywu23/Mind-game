@@ -179,12 +179,10 @@ public class Game {
         aiRoundPoints = 0;
 
         // Logic for scoring in non-power rounds
-        if (aiGuess != null && aiGuess.equals(chosen) && guess.equals(aiChoose)) {
+        if (guess.equals(aiChoose)) {
           playerRoundPoints += 1;
-          aiRoundPoints += 1;
-        } else if (guess.equals(aiChoose)) {
-          playerRoundPoints += 1;
-        } else if (aiGuess != null && aiGuess.equals(chosen)) {
+        }
+        if (aiGuess != null && aiGuess.equals(chosen)) {
           aiRoundPoints += 1;
         }
 

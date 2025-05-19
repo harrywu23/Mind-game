@@ -7,8 +7,6 @@ public class EasyDifficulty implements DifficultyLevel {
 
   public EasyDifficulty(ArtificialIntelligenceStrategy strategy) {
     this.strategy = new RandomStrategy();
-    // pass in AIStrategy so I can access strategy methods guess and choose
-    // (getAicolour,getplayercolour)
   }
 
   @Override
@@ -23,7 +21,7 @@ public class EasyDifficulty implements DifficultyLevel {
   }
 
   @Override
-public Colour getColour(Colour lastChosenColour) {
-  return currentStrategy.getAiGuess(lastChosenColour);
-}
+  public Colour getColour(Colour lastChosenColour) {
+    return currentStrategy.getAiGuess(lastChosenColour);
+  }
 }
