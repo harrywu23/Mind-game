@@ -24,14 +24,14 @@ public class HardDifficulty implements DifficultyLevel {
   }
 
   @Override
-  public void setStrategy(ArtificialIntelligenceStrategy strategy) {
-    this.strategy = strategy;
+  public Colour getColour(Colour lastChosenColour) {
+    return currentStrategy.getAiGuess(lastChosenColour);
   }
 
   @Override
-  public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
+  // set strategy should be void. should set current strategy within this class
+  public void setStrategy(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
 
-    // use currentStrategy.setStrategy() later
     if (currentRound <= 2) {
       currentStrategy = easyStrategy;
     } else if (currentRound == 3) {
@@ -53,6 +53,12 @@ public class HardDifficulty implements DifficultyLevel {
         }
       }
     }
-    return currentStrategy.getAiGuess(lastChosenColour);
+
+    // make a new method that returns this
+    // return currentStrategy.getAiGuess(lastChosenColour);
   }
+
+  // wherever this class was made,
+  // ai.setstrategy
+  // ai.getcolour
 }

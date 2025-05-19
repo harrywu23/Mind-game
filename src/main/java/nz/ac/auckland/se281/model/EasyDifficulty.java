@@ -3,6 +3,7 @@ package nz.ac.auckland.se281.model;
 public class EasyDifficulty implements DifficultyLevel {
 
   private ArtificialIntelligenceStrategy strategy;
+  private ArtificialIntelligenceStrategy currentStrategy;
 
   public EasyDifficulty(ArtificialIntelligenceStrategy strategy) {
     this.strategy = new RandomStrategy();
@@ -17,13 +18,12 @@ public class EasyDifficulty implements DifficultyLevel {
   }
 
   @Override
-  public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
-    return strategy.getAiGuess(lastChosenColour);
-
+  public void setStrategy(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
+    currentStrategy = strategy;
   }
 
   @Override
-  public void setStrategy(ArtificialIntelligenceStrategy strategy) {
-    this.strategy = strategy;
-  }
+public Colour getColour(Colour lastChosenColour) {
+  return currentStrategy.getAiGuess(lastChosenColour);
+}
 }

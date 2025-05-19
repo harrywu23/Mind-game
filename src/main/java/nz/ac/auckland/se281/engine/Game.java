@@ -95,7 +95,8 @@ public class Game {
 
         // AI makes its move and guess
         Colour aiChoose = Ai.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = Ai.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
+        Ai.setStrategy(currentRound, lastRoundColour, aiPointsLastRound); // SETTING AI Strategy
+        Colour aiGuess = Ai.getColour(lastRoundColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 
@@ -163,7 +164,8 @@ public class Game {
 
         // AI's move and guess
         Colour aiChoose = Ai.chooseColour(); // The AI's chosen colour
-        Colour aiGuess = Ai.guessColour(currentRound, lastRoundColour, aiPointsLastRound); // The AI's guessed colour
+        Ai.setStrategy(currentRound, lastRoundColour, aiPointsLastRound); // SETTING AI Strategy
+        Colour aiGuess = Ai.getColour(lastRoundColour); // The AI's guessed colour
 
         MessageCli.PRINT_INFO_MOVE.printMessage(AI_NAME, aiChoose, aiGuess);
 

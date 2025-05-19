@@ -5,6 +5,7 @@ public class MediumDifficulty implements DifficultyLevel {
   private ArtificialIntelligenceStrategy strategy;
   private RandomStrategy easyStrategy;
   private AvoidLastStrategy mediumStrategy;
+  private ArtificialIntelligenceStrategy currentStrategy;
 
   public MediumDifficulty(ArtificialIntelligenceStrategy strategy) {
     this.strategy = strategy;
@@ -19,15 +20,16 @@ public class MediumDifficulty implements DifficultyLevel {
   }
 
   @Override
-  public Colour guessColour(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
+  public void setStrategy(int currentRound, Colour lastChosenColour, int aiPointsLastRound) {
     if (currentRound > 1) {
-      return mediumStrategy.getAiGuess(lastChosenColour);
+      currentStrategy = mediumStrategy;
+    } else {
+      currentStrategy = easyStrategy;
     }
-    return easyStrategy.getAiGuess(lastChosenColour);
   }
 
   @Override
-  public void setStrategy(ArtificialIntelligenceStrategy strategy) {
-    this.strategy = strategy;
+  public Colour getColour(Colour lastChosenColour) {
+    return currentStrategy.getAiGuess(lastChosenColour);
   }
 }
