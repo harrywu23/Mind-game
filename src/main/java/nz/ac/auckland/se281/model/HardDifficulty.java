@@ -15,6 +15,7 @@ public class HardDifficulty implements DifficultyLevel {
     this.easyStrategy = new RandomStrategy();
     this.mediumStrategy = new AvoidLastStrategy();
     this.hardStrategy = new LeastUsedStrategy(historyOfColours);
+    this.currentStrategy = easyStrategy;
 
   }
 
