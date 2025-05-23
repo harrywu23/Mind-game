@@ -60,6 +60,7 @@ public class Game {
     // If all rounds have been played already
     if (currentRound > numRounds) {
       MessageCli.PRINT_END_GAME.printMessage();
+      gameStart = false;
       return;
     }
 
@@ -211,6 +212,8 @@ public class Game {
         winner = player.getName();
         MessageCli.PRINT_WINNER_GAME.printMessage(winner);
       }
+      gameStart = false; // mark the game as ended
+      return; // prevent further execution in play()
     }
   }
 
