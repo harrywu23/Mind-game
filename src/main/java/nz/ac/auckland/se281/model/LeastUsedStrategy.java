@@ -17,48 +17,36 @@ public class LeastUsedStrategy implements ArtificialIntelligenceStrategy {
 
   @Override
   public Colour getAiGuess(Colour lastChosenColour) {
-
-    // reset count every time the method is called
-
     int redCount = 0;
     int greenCount = 0;
     int blueCount = 0;
     int yellowCount = 0;
-
-    // checking which colour has been used the least
 
     for (Colour currentColour : historyOfColours) {
       if (currentColour == null) {
         continue;
       }
 
-      if (currentColour.equals(Colour.RED)) {
+      if (currentColour == Colour.RED) {
         redCount++;
-      } else if (currentColour.equals(Colour.GREEN)) {
+      } else if (currentColour == Colour.GREEN) {
         greenCount++;
-      } else if (currentColour.equals(Colour.BLUE)) {
+      } else if (currentColour == Colour.BLUE) {
         blueCount++;
-      } else if (currentColour.equals(Colour.YELLOW)) {
+      } else if (currentColour == Colour.YELLOW) {
         yellowCount++;
       }
     }
 
-    // start R,G,B,Y
-    Colour leastUsed = Colour.RED;
-    int minCount = redCount;
-
-    if (greenCount < minCount) {
-      leastUsed = Colour.GREEN;
-      minCount = greenCount;
+    // Find the least used colour based on canonical order
+    if (redCount <= greenCount && redCount <= blueCount && redCount <= yellowCount) {
+      return Colour.RED;
+    } else if (greenCount <= blueCount && greenCount <= yellowCount) {
+      return Colour.GREEN;
+    } else if (blueCount <= yellowCount) {
+      return Colour.BLUE;
+    } else {
+      return Colour.YELLOW;
     }
-    if (blueCount < minCount) {
-      leastUsed = Colour.BLUE;
-      minCount = blueCount;
-    }
-    if (yellowCount < minCount) {
-      leastUsed = Colour.YELLOW;
-      minCount = yellowCount;
-    }
-    return leastUsed;
   }
 }

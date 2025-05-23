@@ -18,12 +18,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-  MainTest.Task1.class,
-  MainTest.Task2.class,
-  MainTest.Task3.class,
-  MainTest.Task4.class,
-  MainTest.Task5.class,
-  MainTest.YourTests.class
+    MainTest.Task1.class,
+    MainTest.Task2.class,
+    MainTest.Task3.class,
+    MainTest.Task4.class,
+    MainTest.Task5.class,
+    MainTest.YourTests.class
 })
 public class MainTest {
 
@@ -684,7 +684,7 @@ public class MainTest {
           "G G", // Round 5 - do not change stategy
           PLAY,
           "R R" // Round 6 - change again, bexause it lost
-          );
+      );
       // Round 1
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "BLUE", "GREEN"), 1);
       assertContainsAtRound(PRINT_OUTCOME_ROUND.getMessage("Valerio", 0), 1);
@@ -741,7 +741,7 @@ public class MainTest {
           "R B", // Round 7
           PLAY,
           "R B" // Round 8
-          );
+      );
       // Round 1
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "GREEN", "RED"), 1);
       assertContainsAtRound(PRINT_OUTCOME_ROUND.getMessage("Valerio", 0), 1);
@@ -880,7 +880,7 @@ public class MainTest {
           "B R", // Round 2
           PLAY,
           "Y G" // Round 3
-          );
+      );
 
       // Check game started correctly
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -922,7 +922,7 @@ public class MainTest {
           "B R", // Round 2
           PLAY,
           "Y G" // Round 3
-          );
+      );
 
       // Check game started correctly
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -964,7 +964,7 @@ public class MainTest {
           "Y G", // Round 3
           PLAY,
           "B G" // Round 4
-          );
+      );
 
       // Game starts
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -1010,7 +1010,7 @@ public class MainTest {
           "Y R", // Round 3
           PLAY,
           "R G" // Round 4
-          );
+      );
 
       // Game starts
       assertDoesNotContain(GAME_NOT_STARTED.getMessage());
@@ -1126,8 +1126,7 @@ public class MainTest {
           NEW_GAME + " EASY 1",
           "Parmjot",
           PLAY,
-          "R Y"
-      );
+          "R Y");
 
       assertContainsAtRound(WELCOME_PLAYER.getMessage("Anatol"), 0);
       assertDoesNotContainAtRound("Valerio", 0);
@@ -1252,8 +1251,7 @@ public class MainTest {
           PLAY,
           "B Y",
           PLAY,
-          "Y Y"
-      );
+          "Y Y");
 
       // Check that all of the stats get outputted correctly
       assertContainsAtRound(PRINT_PLAYER_POINTS.getMessage("Anatol", "4"), 9);
@@ -1265,7 +1263,6 @@ public class MainTest {
       assertContainsAtRound("1 of 5", 10);
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "BLUE", "YELLOW"), 10);
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage("Anatol", "BLUE", "RED"), 10);
-
 
       assertContainsAtRound("2 of 5", 11);
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "GREEN", "RED"), 11);
@@ -1387,8 +1384,7 @@ public class MainTest {
     public void TX_11_check_zero_game_length() throws Exception {
       runCommands(
           NEW_GAME + " HARD 0",
-          "Anatol"
-      );
+          "Anatol");
 
       assertContains(INVALID_ROUNDS.getMessage());
       assertDoesNotContain(WELCOME_PLAYER.getMessage("Anatol"));
@@ -1398,8 +1394,7 @@ public class MainTest {
     public void TX_12_check_negative_game_length() throws Exception {
       runCommands(
           NEW_GAME + " HARD -1",
-          "Anatol"
-      );
+          "Anatol");
 
       assertContains(INVALID_ROUNDS.getMessage());
       assertDoesNotContain(WELCOME_PLAYER.getMessage("Anatol"));
@@ -1409,8 +1404,7 @@ public class MainTest {
     public void TX_13_check_invalid_difficulty() throws Exception {
       runCommands(
           NEW_GAME + " SUPER_EASY 2",
-          "Anatol"
-      );
+          "Anatol");
 
       assertContains(INVALID_DIFFICULTY.getMessage());
       assertDoesNotContain(WELCOME_PLAYER.getMessage("Anatol"));
@@ -1419,7 +1413,8 @@ public class MainTest {
     @Test
     public void TX_14_check_power_colour() throws Exception {
       // Makes sure power colour is only announced when required
-      // And does it on a number of rounds not divisible by 3 (unlike other power colour tests)
+      // And does it on a number of rounds not divisible by 3 (unlike other power
+      // colour tests)
       // Also throw some invalid inputs into the mix
 
       Utils.randomAi.setSeed(814253246);
@@ -1438,8 +1433,7 @@ public class MainTest {
           PLAY, "yellow", "Y G",
           PLAY, "G Y",
           PLAY, "B B",
-          PLAY, "R G"
-      );
+          PLAY, "R G");
 
       assertContains(INVALID_HUMAN_INPUT.getMessage());
 
@@ -1470,12 +1464,10 @@ public class MainTest {
           NEW_GAME + " MEDIUM 7",
           "Anatol",
 
-          PLAY, "gReEN YellOW"
-      );
+          PLAY, "gReEN YellOW");
 
       assertContains(PRINT_INFO_MOVE.getMessage("Anatol", "GREEN", "YELLOW"));
     }
-
 
     @Test
     public void TX_17_game_ended_play_and_show_stats() throws Exception {
@@ -1488,8 +1480,7 @@ public class MainTest {
           PLAY, "r b",
           PLAY, "y r",
 
-          SHOW_STATS, PLAY, "g g"
-      );
+          SHOW_STATS, PLAY, "g g");
 
       assertContains(PRINT_END_GAME.getMessage());
       assertContains(GAME_NOT_STARTED.getMessage());
@@ -1532,8 +1523,7 @@ public class MainTest {
           PLAY, "r r",
           PLAY, "r r",
           PLAY, "r r",
-          PLAY, "r r"
-      );
+          PLAY, "r r");
 
       assertContainsAtRound("POWER COLOUR", 3);
       assertContainsAtRound("POWER COLOUR", 6);
@@ -1549,7 +1539,8 @@ public class MainTest {
 
     @Test
     public void TX_19_test_long_run_winning() throws Exception {
-      // Tests that strategy switching works correctly with a run of ten rounds where the AI wins
+      // Tests that strategy switching works correctly with a run of ten rounds where
+      // the AI wins
       // and so shouldn't switch, then switch on the next round when it loses
 
       Utils.randomAi.setSeed(634643);
@@ -1577,8 +1568,7 @@ public class MainTest {
 
           PLAY, "b b", // AI will win these ones (if it has switch to avoid last strategy)
           PLAY, "g r",
-          PLAY, "b r"
-      );
+          PLAY, "b r");
 
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "RED", "GREEN"), 1);
       assertContainsAtRound(PRINT_INFO_MOVE.getMessage(AI_NAME, "BLUE", "GREEN"), 2);
@@ -1614,8 +1604,7 @@ public class MainTest {
           PLAY, "x", "r r r", "rb", "reed ", " ", "purple purple", "orange orang", "blu", "blu blue", "bluee blue",
           "y", "a b", "c d", "e f g", "gray black", "white white", "yellow", "blue", "blue", "aaa aaa", "eulb eulb",
           "wolley yellow", "badabadbadabda a", "7246 472", "5$@64 614#@/';$", "*@6434", "green", "green", "green",
-          "green", "gReen yELlow"
-      );
+          "green", "gReen yELlow");
 
       assertContains(PRINT_INFO_MOVE.getMessage("Anatol", "GREEN", "YELLOW"));
 

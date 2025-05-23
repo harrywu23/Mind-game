@@ -26,6 +26,7 @@ public class Game {
   private int playerTotalPoints;
   private int aiTotalPoints;
   private String winner;
+  private Colour lastRoundColour;
 
   public void newGame(Difficulty difficulty, int numRounds, String[] options) {
     gameStart = true;
@@ -66,8 +67,12 @@ public class Game {
 
     MessageCli.START_ROUND.printMessage(String.valueOf(currentRound), String.valueOf(numRounds));
     // Track player's last round colour
-    Colour lastRoundColour = this.chosenPlayerColour;
-    historyOfColours.add(lastRoundColour);
+    if (currentRound == 1) {
+      lastRoundColour = null;
+    } else {
+      lastRoundColour = this.chosenPlayerColour;
+      historyOfColours.add(lastRoundColour);
+    }
 
     // POWER ROUND
     if (currentRound % 3 == 0 && currentRound != 0) {
@@ -198,7 +203,6 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(AI_NAME, String.valueOf(aiRoundPoints));
       }
     }
-
     currentRound++;
 
     // After final round, show stats and declare winner
